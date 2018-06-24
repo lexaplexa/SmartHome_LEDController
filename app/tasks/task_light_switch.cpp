@@ -40,7 +40,7 @@ void taskCH1PWM()
 void SetCH2(uint8_t unPercent, uint16_t unDelay)
 {
 	nCH2SetPwmVal = unPercent*10;
-	if (nCH2SetPwmVal > DSLed.unPwmCH2MaxVal) {nCH2SetPwmVal = DSLed.unPwmCH2MaxVal;}
+	if (nCH2SetPwmVal > DSLed.unPwmCH2MaxVal) {nCH2SetPwmVal = DSLed.unPwmCH2MaxVal*10;}
 	if		(DSLed.ePwmCH2Config == LEDCH_Disabled)						{nCH2SetPwmVal = 0; cPwmCH2.SetWidth(0); return;}
 	else if	(DSLed.ePwmCH2Config == LEDCH_OnOff && nCH2SetPwmVal > 0)	{cPwmCH2.SetWidth(100);}
 	else if (DSLed.ePwmCH2Config == LEDCH_OnOff && nCH2SetPwmVal == 0)	{cPwmCH2.SetWidth(0);}
