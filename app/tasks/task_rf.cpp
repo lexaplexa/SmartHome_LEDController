@@ -2,7 +2,7 @@
  * task_rf.cpp
  *
  * Created: 15.2.2016 14:25:22
- * Revised: 24.06.2018
+ * Revised: 25.06.2018
  * Author: LeXa
  * BOARD:
  *
@@ -41,8 +41,8 @@ void taskRf()
 			RFData.Slave.sStatusLed.unSupplyVolt = (uint8_t)fVolt + DSLed.nVoltageOffset;
 			
 			/* PWM channel value */
-			RFData.Slave.sStatusLed.unPwmCH1Percent = nCH1SetPwmVal/10;
-			RFData.Slave.sStatusLed.unPwmCH2Percent = nCH2SetPwmVal/10;
+			RFData.Slave.sStatusLed.unPwmCH1Percent = nCH1SetPwmVal;
+			RFData.Slave.sStatusLed.unPwmCH2Percent = nCH2SetPwmVal;
 			RFData.Slave.sStatusLed.unTimeLightOn = unTimeLightsOn;
 			unRfMsgSize = 1+sizeof(RFData.Slave.sStatusLed);
 			break;
@@ -54,7 +54,7 @@ void taskRf()
 			break;
 			
 			
-		case RF_COMM_LED_SET_DATASET:	
+		case RF_COMM_LED_SET_DATASET:
 			if (cRf.m_sPayload.unCounter == (sizeof(DATASET_LED)+1))
 			{
 				/* Copy data to Dataset */
@@ -70,7 +70,7 @@ void taskRf()
 			break;
 			
 			
-		case RF_COMM_LED_SET_PWM:			
+		case RF_COMM_LED_SET_PWM:
 			if (RFData.Master.sSetPwm.unPwmChannel == 1)
 			{
 				if (cRf.m_sPayload.unCounter == 3)	{SetCH1(RFData.Master.sSetPwm.unPercent,0);}
@@ -98,7 +98,7 @@ void taskRf()
 				else								        {SetCH1(100,0); SetCH2(100,0);}
 				RFData.Slave.eError = ERROR_OK;
 			}
-			else {RFData.eRfCommand = RF_COMM_ERROR; RFData.Slave.eError = ERROR_OUT_OF_RANGE;}			
+			else {RFData.eRfCommand = RF_COMM_ERROR; RFData.Slave.eError = ERROR_OUT_OF_RANGE;}
 			unRfMsgSize = 2;
 			break;
 		
