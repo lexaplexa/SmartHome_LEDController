@@ -2,7 +2,7 @@
  * app.h
  *
  * Created: 24.6.2018 10:34:46
- * Revised:
+ * Revised: 25.6.2018
  * Author: LeXa
  * BOARD:
  *
@@ -27,8 +27,8 @@ extern class RF cRf;                /* app\tasks\task_rf.cpp */
 extern RF_DATA RFData;              /* app\tasks\task_rf.cpp */
 extern class PWM cPwmCH1;           /* app\tasks\task_light_switch.cpp */
 extern class PWM cPwmCH2;           /* app\tasks\task_light_switch.cpp */
-extern int16_t nCH1SetPwmVal;       /* app\tasks\task_light_switch.cpp */
-extern int16_t nCH2SetPwmVal;       /* app\tasks\task_light_switch.cpp */
+extern int8_t nCH1SetPwmVal;        /* app\tasks\task_light_switch.cpp */
+extern int8_t nCH2SetPwmVal;        /* app\tasks\task_light_switch.cpp */
 extern uint16_t unTimeLightsOn;     /* app\tasks\task_real_time.cpp */
 
 /************************************************************************/
