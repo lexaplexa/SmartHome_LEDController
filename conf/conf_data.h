@@ -2,7 +2,7 @@
  * conf_data.h
  *
  * Created: 24.6.2018 17:09:11
- * Revised: 25.6.2018
+ * Revised: 5.7.2018
  * Author: LeXa
  * BOARD:
  *

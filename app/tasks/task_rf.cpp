@@ -2,7 +2,7 @@
  * task_rf.cpp
  *
  * Created: 15.2.2016 14:25:22
- * Revised: 25.06.2018
+ * Revised: 5.7.2018
  * Author: LeXa
  * BOARD:
  *
@@ -102,11 +102,13 @@ void taskRf()
             unRfMsgSize = 2;
             break;
             
+            
         case RF_COMM_LED_CLEAR_LIGHTON_COUNTER:
             unTimeLightsOn = 0;
             RFData.Slave.eError = ERROR_OK;
             unRfMsgSize = 2;
             break;
+        
         
         default:
             RFData.eRfCommand = RF_COMM_ERROR;
