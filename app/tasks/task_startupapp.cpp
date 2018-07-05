@@ -2,7 +2,7 @@
  * task_startupapp.cpp
  *
  * Created: 24.6.2018 10:37:08
- * Revised:
+ * Revised: 5.7.2018
  * Author: LeXa
  * BOARD:
  *
@@ -16,8 +16,8 @@ DATASET_LED DSLed;
 DATASET_LED EEDSLed EEMEM = {
     LEDCH_PWM,
     LEDCH_PWM,
-    1000,
-    1000,
+    100,
+    100,
     false,
     false,
     false,
