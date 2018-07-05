@@ -101,6 +101,12 @@ void taskRf()
             else {RFData.eRfCommand = RF_COMM_ERROR; RFData.Slave.eError = ERROR_OUT_OF_RANGE;}
             unRfMsgSize = 2;
             break;
+            
+        case RF_COMM_LED_CLEAR_LIGHTON_COUNTER:
+            unTimeLightsOn = 0;
+            RFData.Slave.eError = ERROR_OK;
+            unRfMsgSize = 2;
+            break;
         
         default:
             RFData.eRfCommand = RF_COMM_ERROR;

@@ -78,6 +78,7 @@ enum RF_COMMAND_enum {
     RF_COMM_LED_GET_DATASET,
     RF_COMM_LED_SET_DATASET,
     RF_COMM_LED_SET_PWM,
+    RF_COMM_LED_CLEAR_LIGHTON_COUNTER,
     
     /* Error answer to command. Error code is followed */
     RF_COMM_ERROR = 255,
