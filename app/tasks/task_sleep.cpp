@@ -14,6 +14,6 @@
 
 void taskSleep()
 {
-	/* If lights on, then this task must be active to prevent controller from deep sleep */
-	if (cPwmCH1.m_nPercent || cPwmCH2.m_nPercent) {cMTask.Delay(taskSleep,TASK_TOUT_MS(100));}
+    /* If lights on, then this task must be active to prevent controller from deep sleep */
+    if (cPwmCH1.m_nPercent || cPwmCH2.m_nPercent) {cMTask.Delay(taskSleep,TASK_TOUT_MS(100));}
 }

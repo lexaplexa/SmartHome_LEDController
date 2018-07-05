@@ -19,13 +19,13 @@ int8_t nCH2SetPwmVal;
 
 void SetCH1(uint8_t unPercent, uint16_t unDelay)
 {
-	nCH1SetPwmVal = unPercent;
-	if (nCH1SetPwmVal > DSLed.unPwmCH1MaxVal) {nCH1SetPwmVal = DSLed.unPwmCH1MaxVal;}
-	if		(DSLed.ePwmCH1Config == LEDCH_Disabled)						{nCH1SetPwmVal = 0; cPwmCH1.SetWidth(0); return;}
-	else if	(DSLed.ePwmCH1Config == LEDCH_OnOff && nCH1SetPwmVal > 0)	{cPwmCH1.SetWidth(100);}
-	else if (DSLed.ePwmCH1Config == LEDCH_OnOff && nCH1SetPwmVal == 0)	{cPwmCH1.SetWidth(0);}
-	else if (DSLed.ePwmCH1Config == LEDCH_PWM)							{cMTask.Delay(taskCH1PWM,unDelay);}
-	else {return;}
+    nCH1SetPwmVal = unPercent;
+    if (nCH1SetPwmVal > DSLed.unPwmCH1MaxVal) {nCH1SetPwmVal = DSLed.unPwmCH1MaxVal;}
+    if      (DSLed.ePwmCH1Config == LEDCH_Disabled)                     {nCH1SetPwmVal = 0; cPwmCH1.SetWidth(0); return;}
+    else if (DSLed.ePwmCH1Config == LEDCH_OnOff && nCH1SetPwmVal > 0)   {cPwmCH1.SetWidth(100);}
+    else if (DSLed.ePwmCH1Config == LEDCH_OnOff && nCH1SetPwmVal == 0)  {cPwmCH1.SetWidth(0);}
+    else if (DSLed.ePwmCH1Config == LEDCH_PWM)                          {cMTask.Delay(taskCH1PWM,unDelay);}
+    else {return;}
     
     /* Keep at least one task active to prevent against deep sleep */
     cMTask.Delay(taskSleep,TASK_TOUT_MS(100));
@@ -33,19 +33,19 @@ void SetCH1(uint8_t unPercent, uint16_t unDelay)
 
 void taskCH1PWM()
 {
-	if		(cPwmCH1.m_nPercent > nCH1SetPwmVal*10) {cPwmCH1.Add(-1); cMTask.Delay(taskCH1PWM,TASK_TOUT_MS(PWM_DELAY_DEC_MS));}
-	else if (cPwmCH1.m_nPercent < nCH1SetPwmVal*10) {cPwmCH1.Add(+1); cMTask.Delay(taskCH1PWM,TASK_TOUT_MS(PWM_DELAY_INC_MS));} 
+    if      (cPwmCH1.m_nPercent > nCH1SetPwmVal*10) {cPwmCH1.Add(-1); cMTask.Delay(taskCH1PWM,TASK_TOUT_MS(PWM_DELAY_DEC_MS));}
+    else if (cPwmCH1.m_nPercent < nCH1SetPwmVal*10) {cPwmCH1.Add(+1); cMTask.Delay(taskCH1PWM,TASK_TOUT_MS(PWM_DELAY_INC_MS));} 
 }
 
 void SetCH2(uint8_t unPercent, uint16_t unDelay)
 {
-	nCH2SetPwmVal = unPercent;
-	if (nCH2SetPwmVal > DSLed.unPwmCH2MaxVal) {nCH2SetPwmVal = DSLed.unPwmCH2MaxVal;}
-	if		(DSLed.ePwmCH2Config == LEDCH_Disabled)						{nCH2SetPwmVal = 0; cPwmCH2.SetWidth(0); return;}
-	else if	(DSLed.ePwmCH2Config == LEDCH_OnOff && nCH2SetPwmVal > 0)	{cPwmCH2.SetWidth(100);}
-	else if (DSLed.ePwmCH2Config == LEDCH_OnOff && nCH2SetPwmVal == 0)	{cPwmCH2.SetWidth(0);}
-	else if (DSLed.ePwmCH2Config == LEDCH_PWM)							{cMTask.Delay(taskCH2PWM,unDelay);}
-	else {return;}
+    nCH2SetPwmVal = unPercent;
+    if (nCH2SetPwmVal > DSLed.unPwmCH2MaxVal) {nCH2SetPwmVal = DSLed.unPwmCH2MaxVal;}
+    if      (DSLed.ePwmCH2Config == LEDCH_Disabled)                     {nCH2SetPwmVal = 0; cPwmCH2.SetWidth(0); return;}
+    else if (DSLed.ePwmCH2Config == LEDCH_OnOff && nCH2SetPwmVal > 0)   {cPwmCH2.SetWidth(100);}
+    else if (DSLed.ePwmCH2Config == LEDCH_OnOff && nCH2SetPwmVal == 0)  {cPwmCH2.SetWidth(0);}
+    else if (DSLed.ePwmCH2Config == LEDCH_PWM)                          {cMTask.Delay(taskCH2PWM,unDelay);}
+    else {return;}
     
     /* Keep at least one task active to prevent against deep sleep */
     cMTask.Delay(taskSleep,TASK_TOUT_MS(100));
@@ -53,49 +53,49 @@ void SetCH2(uint8_t unPercent, uint16_t unDelay)
 
 void taskCH2PWM()
 {
-	if		(cPwmCH2.m_nPercent > nCH2SetPwmVal*10) {cPwmCH2.Add(-1); cMTask.Delay(taskCH2PWM,TASK_TOUT_MS(PWM_DELAY_DEC_MS));}
-	else if (cPwmCH2.m_nPercent < nCH2SetPwmVal*10) {cPwmCH2.Add(+1); cMTask.Delay(taskCH2PWM,TASK_TOUT_MS(PWM_DELAY_INC_MS));}
+    if      (cPwmCH2.m_nPercent > nCH2SetPwmVal*10) {cPwmCH2.Add(-1); cMTask.Delay(taskCH2PWM,TASK_TOUT_MS(PWM_DELAY_DEC_MS));}
+    else if (cPwmCH2.m_nPercent < nCH2SetPwmVal*10) {cPwmCH2.Add(+1); cMTask.Delay(taskCH2PWM,TASK_TOUT_MS(PWM_DELAY_INC_MS));}
 }
 
 void taskLongPressSwitch()
 {
-	if (~SWITCH_PORT.IN & (1<<SWITCH_PIN))
-	{
-		if (!cPwmCH1.m_nPercent)		{SetCH1(100,0);}
-		else if (!cPwmCH2.m_nPercent)	{SetCH2(100,0);}
-		else							{SetCH1(0,0); SetCH2(0,0);}
-	}
+    if (~SWITCH_PORT.IN & (1<<SWITCH_PIN))
+    {
+        if (!cPwmCH1.m_nPercent)        {SetCH1(100,0);}
+        else if (!cPwmCH2.m_nPercent)   {SetCH2(100,0);}
+        else                            {SetCH1(0,0); SetCH2(0,0);}
+    }
 }
 
 
 SIGNAL(SWITCH_INT_vect)
 {
-	/* Wake up RF and set time event to -1 to be sure, that RF doesn't sleep again */
-	cRf.WakeUp();
+    /* Wake up RF and set time event to -1 to be sure, that RF doesn't sleep again */
+    cRf.WakeUp();
     
-	if (DSLed.bBothEdges)
-	{
-		if (SWITCH_PORT.IN & (1<<SWITCH_PIN)) {SetCH1(0,0); SetCH2(0,0);}
-		else {SetCH1(100,0); SetCH2(100,0);}
-	}
-	else if (!DSLed.bChSeparationEnable)
-	{
-		if (!nCH1SetPwmVal && !nCH2SetPwmVal)	{SetCH1(100,0); SetCH2(100,0);}
-		else									{SetCH1(0,0); SetCH2(0,0);}
-	}
-	else
-	{
-		if (DSLed.bCh1First)
-		{
-			if (!cPwmCH1.m_nPercent)		{SetCH1(100,0); cMTask.Delay(taskLongPressSwitch,TASK_TOUT_MS(400));}
-			else if (!cPwmCH2.m_nPercent)	{SetCH2(100,TASK_TOUT_MS(400)); cMTask.Delay(taskLongPressSwitch,TASK_TOUT_MS(400));}
-			else							{SetCH1(0,0); SetCH2(0,0);}
-		}
-		else
-		{
-			if (!cPwmCH2.m_nPercent)		{SetCH2(100,0); cMTask.Delay(taskLongPressSwitch,TASK_TOUT_MS(400));}
-			else if (!cPwmCH1.m_nPercent)	{SetCH1(100,TASK_TOUT_MS(400)); cMTask.Delay(taskLongPressSwitch,TASK_TOUT_MS(400));}
-			else							{SetCH1(0,0); SetCH2(0,0);}
-		}
-	}
+    if (DSLed.bBothEdges)
+    {
+        if (SWITCH_PORT.IN & (1<<SWITCH_PIN)) {SetCH1(0,0); SetCH2(0,0);}
+        else {SetCH1(100,0); SetCH2(100,0);}
+    }
+    else if (!DSLed.bChSeparationEnable)
+    {
+        if (!nCH1SetPwmVal && !nCH2SetPwmVal)   {SetCH1(100,0); SetCH2(100,0);}
+        else                                    {SetCH1(0,0); SetCH2(0,0);}
+    }
+    else
+    {
+        if (DSLed.bCh1First)
+        {
+            if (!cPwmCH1.m_nPercent)        {SetCH1(100,0); cMTask.Delay(taskLongPressSwitch,TASK_TOUT_MS(400));}
+            else if (!cPwmCH2.m_nPercent)   {SetCH2(100,TASK_TOUT_MS(400)); cMTask.Delay(taskLongPressSwitch,TASK_TOUT_MS(400));}
+            else                            {SetCH1(0,0); SetCH2(0,0);}
+        }
+        else
+        {
+            if (!cPwmCH2.m_nPercent)        {SetCH2(100,0); cMTask.Delay(taskLongPressSwitch,TASK_TOUT_MS(400));}
+            else if (!cPwmCH1.m_nPercent)   {SetCH1(100,TASK_TOUT_MS(400)); cMTask.Delay(taskLongPressSwitch,TASK_TOUT_MS(400));}
+            else                            {SetCH1(0,0); SetCH2(0,0);}
+        }
+    }
 }
