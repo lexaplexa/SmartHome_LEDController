@@ -32,8 +32,20 @@ void SetCH1(uint8_t unPercent, uint16_t unDelay)
 
 void taskCH1PWM()
 {
-    if      (cPwmCH1.m_nPercent > nCH1SetPwmVal*10) {cPwmCH1.Add(-1); cMTask.Delay(taskCH1PWM,TASK_TOUT_MS(PWM_DELAY_DEC_MS));}
-    else if (cPwmCH1.m_nPercent < nCH1SetPwmVal*10) {cPwmCH1.Add(+1); cMTask.Delay(taskCH1PWM,TASK_TOUT_MS(PWM_DELAY_INC_MS));} 
+    /* Decrease PWM */
+    if      (cPwmCH1.m_nPercent > nCH1SetPwmVal*10) 
+    {
+        if (cPwmCH1.m_nPercent < 300)   {cPwmCH1.Add(-1);}
+        else                            {cPwmCH1.Add(-2);}
+        cMTask.Delay(taskCH1PWM,TASK_TOUT_MS(PWM_DELAY_DEC_MS));
+    }
+    /* Increase PWM */
+    else if (cPwmCH1.m_nPercent < nCH1SetPwmVal*10) 
+    {
+        if (cPwmCH1.m_nPercent < 300) {cPwmCH1.Add(+2);}
+        else                          {cPwmCH1.Add(+4);}
+        cMTask.Delay(taskCH1PWM,TASK_TOUT_MS(PWM_DELAY_INC_MS));
+    }
 }
 
 void SetCH2(uint8_t unPercent, uint16_t unDelay)
@@ -51,8 +63,20 @@ void SetCH2(uint8_t unPercent, uint16_t unDelay)
 
 void taskCH2PWM()
 {
-    if      (cPwmCH2.m_nPercent > nCH2SetPwmVal*10) {cPwmCH2.Add(-1); cMTask.Delay(taskCH2PWM,TASK_TOUT_MS(PWM_DELAY_DEC_MS));}
-    else if (cPwmCH2.m_nPercent < nCH2SetPwmVal*10) {cPwmCH2.Add(+1); cMTask.Delay(taskCH2PWM,TASK_TOUT_MS(PWM_DELAY_INC_MS));}
+    /* Decrease PWM */
+    if      (cPwmCH2.m_nPercent > nCH2SetPwmVal*10)
+    {
+        if (cPwmCH2.m_nPercent < 300)   {cPwmCH2.Add(-2);}
+        else                            {cPwmCH2.Add(-4);}
+        cMTask.Delay(taskCH2PWM,TASK_TOUT_MS(PWM_DELAY_DEC_MS));
+    }
+    /* Increase PWM */
+    else if (cPwmCH2.m_nPercent < nCH2SetPwmVal*10)
+    {
+        if (cPwmCH2.m_nPercent < 300) {cPwmCH2.Add(+1);}
+        else                          {cPwmCH2.Add(+2);}
+        cMTask.Delay(taskCH2PWM,TASK_TOUT_MS(PWM_DELAY_INC_MS));
+    }
 }
 
 void taskLongPressSwitch()
