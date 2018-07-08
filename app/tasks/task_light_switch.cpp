@@ -2,7 +2,7 @@
  * task_light_switch.cpp
  *
  * Created: 11.2.2016 13:40:59
- * Revised: 7.7.2018
+ * Revised: 8.7.2018
  * Author: LeXa
  * BOARD:
  *
@@ -66,15 +66,15 @@ void taskCH2PWM()
     /* Decrease PWM */
     if      (cPwmCH2.m_nPercent > nCH2SetPwmVal*10)
     {
-        if (cPwmCH2.m_nPercent < 300)   {cPwmCH2.Add(-2);}
-        else                            {cPwmCH2.Add(-4);}
+        if (cPwmCH2.m_nPercent < 300)   {cPwmCH2.Add(-1);}
+        else                            {cPwmCH2.Add(-2);}
         cMTask.Delay(taskCH2PWM,TASK_TOUT_MS(PWM_DELAY_DEC_MS));
     }
     /* Increase PWM */
     else if (cPwmCH2.m_nPercent < nCH2SetPwmVal*10)
     {
-        if (cPwmCH2.m_nPercent < 300) {cPwmCH2.Add(+1);}
-        else                          {cPwmCH2.Add(+2);}
+        if (cPwmCH2.m_nPercent < 300) {cPwmCH2.Add(+2);}
+        else                          {cPwmCH2.Add(+4);}
         cMTask.Delay(taskCH2PWM,TASK_TOUT_MS(PWM_DELAY_INC_MS));
     }
 }
