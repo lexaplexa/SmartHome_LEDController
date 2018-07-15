@@ -2,7 +2,7 @@
  * conf_data.h
  *
  * Created: 24.6.2018 17:09:11
- * Revised: 5.7.2018
+ * Revised: 15.7.2018
  * Author: LeXa
  * BOARD:
  *
@@ -54,7 +54,7 @@ union DATASET_RF {
 };
 
 union DATASET_LED {
-    uint8_t reg[8];
+    uint8_t reg[10];
     struct {
         LEDChConfig_enum        ePwmCH1Config;              /* PWM channel configuration                                    */
         LEDChConfig_enum        ePwmCH2Config;              /* PWM channel configuration                                    */
@@ -65,6 +65,8 @@ union DATASET_LED {
         uint8_t                 bCh1First:1;                /* 1 - channel 1 first,         0 - channel 2 first             */
         int8_t                  nVoltageOffset;             /* Voltage offset 1bit = 0.1V, resolution -12.7V..+12.8V        */
         uint16_t                unTimeoutMin;               /* Light off timeout 1bit - 1 minute                            */
+        uint8_t                 unIncSpeed;                 /* PWM increase speed. 1-fastest .. 100-slowest                 */
+        uint8_t                 unDecSpeed;                 /* PWM decrease speed. 1-fastest .. 100-slowest                 */
     };
 };    
 

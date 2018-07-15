@@ -32,16 +32,17 @@ void SetCH1(uint8_t unPercent, uint16_t unDelay)
 
 void taskCH1PWM()
 {
+    if (DSLed.unIncSpeed == 0) {DSLed.unIncSpeed = 1;}
     /* Decrease PWM */
     if      (cPwmCH1.m_nPercent > nCH1SetPwmVal*10) 
     {
-        cPwmCH1.Add((cPwmCH1.m_nPercent/10+1)*-1);
+        cPwmCH1.Add((cPwmCH1.m_nPercent/(DSLed.unDecSpeed*10)+1)*-1);
         cMTask.Delay(taskCH1PWM,TASK_TOUT_MS(10));
     }
     /* Increase PWM */
     else if (cPwmCH1.m_nPercent < nCH1SetPwmVal*10) 
     {
-        cPwmCH1.Add((cPwmCH1.m_nPercent/10+1));
+        cPwmCH1.Add((cPwmCH1.m_nPercent/(DSLed.unIncSpeed*10)+1));
         cMTask.Delay(taskCH1PWM,TASK_TOUT_MS(10));
     }
 }
@@ -61,16 +62,17 @@ void SetCH2(uint8_t unPercent, uint16_t unDelay)
 
 void taskCH2PWM()
 {
+    if (DSLed.unDecSpeed == 0) {DSLed.unDecSpeed = 1;}
     /* Decrease PWM */
     if      (cPwmCH2.m_nPercent > nCH2SetPwmVal*10)
     {
-        cPwmCH2.Add((cPwmCH2.m_nPercent/10+1)*-1);
+        cPwmCH2.Add((cPwmCH2.m_nPercent/(DSLed.unDecSpeed*10)+1)*-1);
         cMTask.Delay(taskCH2PWM,TASK_TOUT_MS(10));
     }
     /* Increase PWM */
     else if (cPwmCH2.m_nPercent < nCH2SetPwmVal*10)
     {
-        cPwmCH2.Add((cPwmCH2.m_nPercent/10+1));
+        cPwmCH2.Add((cPwmCH2.m_nPercent/(DSLed.unIncSpeed*10)+1));
         cMTask.Delay(taskCH2PWM,TASK_TOUT_MS(10));
     }
 }
