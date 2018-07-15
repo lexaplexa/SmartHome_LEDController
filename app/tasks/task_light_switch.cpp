@@ -2,7 +2,7 @@
  * task_light_switch.cpp
  *
  * Created: 11.2.2016 13:40:59
- * Revised: 8.7.2018
+ * Revised: 15.7.2018
  * Author: LeXa
  * BOARD:
  *
@@ -21,7 +21,7 @@ void SetCH1(uint8_t unPercent, uint16_t unDelay)
 {
     nCH1SetPwmVal = unPercent;
     if      (DSLed.ePwmCH1Config == LEDCH_Disabled)                     {nCH1SetPwmVal = 0; cPwmCH1.SetWidth(0); return;}
-    else if (DSLed.ePwmCH1Config == LEDCH_OnOff && nCH1SetPwmVal > 0)   {cPwmCH1.SetWidth(100);}
+    else if (DSLed.ePwmCH1Config == LEDCH_OnOff && nCH1SetPwmVal > 0)   {cPwmCH1.SetWidth(1000);}
     else if (DSLed.ePwmCH1Config == LEDCH_OnOff && nCH1SetPwmVal == 0)  {cPwmCH1.SetWidth(0);}
     else if (DSLed.ePwmCH1Config == LEDCH_PWM)                          {cMTask.Delay(taskCH1PWM,unDelay);}
     else {return;}
@@ -35,16 +35,14 @@ void taskCH1PWM()
     /* Decrease PWM */
     if      (cPwmCH1.m_nPercent > nCH1SetPwmVal*10) 
     {
-        if (cPwmCH1.m_nPercent < 300)   {cPwmCH1.Add(-1);}
-        else                            {cPwmCH1.Add(-2);}
+        cPwmCH1.Add((cPwmCH1.m_nPercent/10+1)*-1);
         cMTask.Delay(taskCH1PWM,TASK_TOUT_MS(PWM_DELAY_DEC_MS));
     }
     /* Increase PWM */
     else if (cPwmCH1.m_nPercent < nCH1SetPwmVal*10) 
     {
-        if (cPwmCH1.m_nPercent < 300) {cPwmCH1.Add(+2);}
-        else                          {cPwmCH1.Add(+4);}
-        cMTask.Delay(taskCH1PWM,TASK_TOUT_MS(PWM_DELAY_INC_MS));
+        cPwmCH1.Add((cPwmCH1.m_nPercent/10+1));
+        cMTask.Delay(taskCH1PWM,TASK_TOUT_MS(PWM_DELAY_DEC_MS));
     }
 }
 
@@ -52,7 +50,7 @@ void SetCH2(uint8_t unPercent, uint16_t unDelay)
 {
     nCH2SetPwmVal = unPercent;
     if      (DSLed.ePwmCH2Config == LEDCH_Disabled)                     {nCH2SetPwmVal = 0; cPwmCH2.SetWidth(0); return;}
-    else if (DSLed.ePwmCH2Config == LEDCH_OnOff && nCH2SetPwmVal > 0)   {cPwmCH2.SetWidth(100);}
+    else if (DSLed.ePwmCH2Config == LEDCH_OnOff && nCH2SetPwmVal > 0)   {cPwmCH2.SetWidth(1000);}
     else if (DSLed.ePwmCH2Config == LEDCH_OnOff && nCH2SetPwmVal == 0)  {cPwmCH2.SetWidth(0);}
     else if (DSLed.ePwmCH2Config == LEDCH_PWM)                          {cMTask.Delay(taskCH2PWM,unDelay);}
     else {return;}
@@ -66,16 +64,14 @@ void taskCH2PWM()
     /* Decrease PWM */
     if      (cPwmCH2.m_nPercent > nCH2SetPwmVal*10)
     {
-        if (cPwmCH2.m_nPercent < 300)   {cPwmCH2.Add(-1);}
-        else                            {cPwmCH2.Add(-2);}
+        cPwmCH2.Add((cPwmCH2.m_nPercent/10+1)*-1);
         cMTask.Delay(taskCH2PWM,TASK_TOUT_MS(PWM_DELAY_DEC_MS));
     }
     /* Increase PWM */
     else if (cPwmCH2.m_nPercent < nCH2SetPwmVal*10)
     {
-        if (cPwmCH2.m_nPercent < 300) {cPwmCH2.Add(+2);}
-        else                          {cPwmCH2.Add(+4);}
-        cMTask.Delay(taskCH2PWM,TASK_TOUT_MS(PWM_DELAY_INC_MS));
+        cPwmCH2.Add((cPwmCH2.m_nPercent/10+1));
+        cMTask.Delay(taskCH2PWM,TASK_TOUT_MS(PWM_DELAY_DEC_MS));
     }
 }
 
