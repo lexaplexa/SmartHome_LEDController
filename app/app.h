@@ -2,7 +2,7 @@
  * app.h
  *
  * Created: 24.6.2018 10:34:46
- * Revised: 25.6.2018
+ * Revised: 27.12.2018
  * Author: LeXa
  * BOARD:
  *
@@ -29,6 +29,7 @@ extern class PWM cPwmCH1;           /* app\tasks\task_light_switch.cpp */
 extern class PWM cPwmCH2;           /* app\tasks\task_light_switch.cpp */
 extern int8_t nCH1SetPwmVal;        /* app\tasks\task_light_switch.cpp */
 extern int8_t nCH2SetPwmVal;        /* app\tasks\task_light_switch.cpp */
+extern class REALTIME cRtc;         /* app\tasks\task_real_time.cpp */
 extern uint16_t unTimeLightsOn;     /* app\tasks\task_real_time.cpp */
 
 /************************************************************************/
@@ -44,12 +45,13 @@ extern uint16_t unTimeLightsOn;     /* app\tasks\task_real_time.cpp */
 /*                                                                      */
 /* Every task source code must include core.h                           */
 /************************************************************************/
-void taskRf();
-void taskSleep();
-void taskCH1PWM();
-void taskCH2PWM();
+void taskRf();                      /* app\tasks\task_rf.cpp */
+void taskSleep();                   /* app\tasks\task_sleep.cpp */
+void taskCH1PWM();                  /* app\tasks\task_light_switch.cpp */
+void taskCH2PWM();                  /* app\tasks\task_light_switch.cpp */
+void taskLightOff();                /* app\tasks\task_real_time.cpp */
 
-void SetCH1(uint8_t unPercent, uint16_t unDelay);
-void SetCH2(uint8_t unPercent, uint16_t unDelay);
+void SetCH1(uint8_t unPercent, uint16_t unDelay);   /* app\tasks\task_light_switch.cpp */
+void SetCH2(uint8_t unPercent, uint16_t unDelay);   /* app\tasks\task_light_switch.cpp */
 
 #endif /* APP_H_ */

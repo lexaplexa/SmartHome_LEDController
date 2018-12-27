@@ -2,7 +2,7 @@
  * task_startupapp.cpp
  *
  * Created: 24.6.2018 10:37:08
- * Revised: 15.7.2018
+ * Revised: 27.12.2018
  * Author: LeXa
  * BOARD:
  *
@@ -54,16 +54,6 @@ void taskStartUpApp()
     
     /* ADC initialization */
     adc_init(ADCA,ADC_PRESCALER_DIV256_gc,ADC_RESOLUTION_12BIT_gc);
-    
-    /* Real Time Clock initialization */
-    CLK.RTCCTRL = (0x06<<1)|CLK_RTCEN_bm;
-    RTC.INTCTRL = RTC_OVFINTLVL_HI_gc;
-    RTC.CNT = 0;
-    while (RTC.STATUS & RTC_SYNCBUSY_bm);
-    RTC.PER = 0x7FFF;
-    while (RTC.STATUS & RTC_SYNCBUSY_bm);
-    RTC.CTRL = RTC_PRESCALER_DIV1_gc;
-    while (RTC.STATUS & RTC_SYNCBUSY_bm);
     
     /* RF initialization */
     cRf.Init();

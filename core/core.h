@@ -2,7 +2,7 @@
  * core.h
  *
  * Created: 24.6.2018 09:57:04
- * Revised: 
+ * Revised: 27.12.2018
  * Author: LeXa
  * BOARD:
  *
@@ -31,6 +31,8 @@
 #include <core/drivers/spi.h>
 
 #include <core/extensions/rf.h>
+
+#include <core/modules/realtime/realtime.h>
 
 /************************************************************************/
 /* EXTERNAL CLASSES                                                     */
