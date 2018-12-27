@@ -2,7 +2,7 @@
  * realtime.cpp
  *
  * Created: 20.12.2018 11:58:20
- * Revised:
+ * Revised: 27.12.2018
  * Author: LeXa
  * BOARD:
  *
@@ -33,6 +33,7 @@ void REALTIME::SetTime(uint8_t unTimeHours, uint8_t unTimeMinutes, uint8_t unTim
 
 void REALTIME::StartCounter(void pvTask(), uint16_t unTimeoutS)
 {
+    if (unTimeoutS == 0) {m_nMatch = -1; return;}
     m_nMatch = (m_nCounter + unTimeoutS) & 0x7FFFFFFF;
     m_pvTask = (void*)pvTask;
 }

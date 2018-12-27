@@ -68,6 +68,5 @@ void taskStartUpApp()
     cRf.m_eStatus = RF_STATUS_RECEIVE_OK;
     taskRf();
     
-    /* Task creation */
-    cMTask.Delay(taskSleep,TASK_TOUT_MS(100));
+    cMTask.DeepSleepEnable();
 }

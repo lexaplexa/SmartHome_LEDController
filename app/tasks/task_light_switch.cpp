@@ -20,15 +20,13 @@ int8_t nCH2SetPwmVal;
 void SetCH1(uint8_t unPercent, uint16_t unDelay)
 {
     nCH1SetPwmVal = unPercent;
-    if (nCH1SetPwmVal && DSLed.unTimeoutMin) {cRtc.StartCounter(taskLightOff, DSLed.unTimeoutMin*60);}
+    if (nCH1SetPwmVal) {cRtc.StartCounter(taskLightOff, DSLed.unTimeoutMin*60); cMTask.DeepSleepDisable();}
+    else {cMTask.DeepSleepEnable();}
     if      (DSLed.ePwmCH1Config == LEDCH_Disabled)                     {nCH1SetPwmVal = 0; cPwmCH1.SetWidth(0); return;}
     else if (DSLed.ePwmCH1Config == LEDCH_OnOff && nCH1SetPwmVal > 0)   {cPwmCH1.SetWidth(1000);}
     else if (DSLed.ePwmCH1Config == LEDCH_OnOff && nCH1SetPwmVal == 0)  {cPwmCH1.SetWidth(0);}
     else if (DSLed.ePwmCH1Config == LEDCH_PWM)                          {cMTask.Delay(taskCH1PWM,unDelay);}
     else {return;}
-    
-    /* Keep at least one task active to prevent against deep sleep */
-    cMTask.Delay(taskSleep,TASK_TOUT_MS(100));
 }
 
 void taskCH1PWM()
@@ -51,15 +49,13 @@ void taskCH1PWM()
 void SetCH2(uint8_t unPercent, uint16_t unDelay)
 {
     nCH2SetPwmVal = unPercent;
-    if (nCH2SetPwmVal && DSLed.unTimeoutMin) {cRtc.StartCounter(taskLightOff, DSLed.unTimeoutMin*60);}
+    if (nCH2SetPwmVal) {cRtc.StartCounter(taskLightOff, DSLed.unTimeoutMin*60); cMTask.DeepSleepDisable();}
+    else {cMTask.DeepSleepEnable();}
     if      (DSLed.ePwmCH2Config == LEDCH_Disabled)                     {nCH2SetPwmVal = 0; cPwmCH2.SetWidth(0); return;}
     else if (DSLed.ePwmCH2Config == LEDCH_OnOff && nCH2SetPwmVal > 0)   {cPwmCH2.SetWidth(1000);}
     else if (DSLed.ePwmCH2Config == LEDCH_OnOff && nCH2SetPwmVal == 0)  {cPwmCH2.SetWidth(0);}
     else if (DSLed.ePwmCH2Config == LEDCH_PWM)                          {cMTask.Delay(taskCH2PWM,unDelay);}
     else {return;}
-    
-    /* Keep at least one task active to prevent against deep sleep */
-    cMTask.Delay(taskSleep,TASK_TOUT_MS(100));
 }
 
 void taskCH2PWM()

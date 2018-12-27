@@ -194,9 +194,6 @@
     <Compile Include="app\tasks\task_rf.cpp">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="app\tasks\task_sleep.cpp">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="app\tasks\task_startupapp.cpp">
       <SubType>compile</SubType>
     </Compile>
