@@ -2,7 +2,7 @@
  * task_light_switch.cpp
  *
  * Created: 11.2.2016 13:40:59
- * Revised: 15.7.2018
+ * Revised: 27.12.2018
  * Author: LeXa
  * BOARD:
  *
@@ -20,6 +20,7 @@ int8_t nCH2SetPwmVal;
 void SetCH1(uint8_t unPercent, uint16_t unDelay)
 {
     nCH1SetPwmVal = unPercent;
+    if (nCH1SetPwmVal && DSLed.unTimeoutMin) {cRtc.StartCounter(taskLightOff, DSLed.unTimeoutMin*60);}
     if      (DSLed.ePwmCH1Config == LEDCH_Disabled)                     {nCH1SetPwmVal = 0; cPwmCH1.SetWidth(0); return;}
     else if (DSLed.ePwmCH1Config == LEDCH_OnOff && nCH1SetPwmVal > 0)   {cPwmCH1.SetWidth(1000);}
     else if (DSLed.ePwmCH1Config == LEDCH_OnOff && nCH1SetPwmVal == 0)  {cPwmCH1.SetWidth(0);}
@@ -50,6 +51,7 @@ void taskCH1PWM()
 void SetCH2(uint8_t unPercent, uint16_t unDelay)
 {
     nCH2SetPwmVal = unPercent;
+    if (nCH2SetPwmVal && DSLed.unTimeoutMin) {cRtc.StartCounter(taskLightOff, DSLed.unTimeoutMin*60);}
     if      (DSLed.ePwmCH2Config == LEDCH_Disabled)                     {nCH2SetPwmVal = 0; cPwmCH2.SetWidth(0); return;}
     else if (DSLed.ePwmCH2Config == LEDCH_OnOff && nCH2SetPwmVal > 0)   {cPwmCH2.SetWidth(1000);}
     else if (DSLed.ePwmCH2Config == LEDCH_OnOff && nCH2SetPwmVal == 0)  {cPwmCH2.SetWidth(0);}
