@@ -126,5 +126,4 @@ SIGNAL(RF_IRQ_vect)
     if (DSRf.unRFBaud == (RF_BAUD_enum)RF_BAUD_250kbps_gc)      {cMTask.Delay(taskRf,TASK_TOUT_MS(10));}
     else if (DSRf.unRFBaud == (RF_BAUD_enum)RF_BAUD_1Mbps_gc)   {cMTask.Delay(taskRf,TASK_TOUT_MS(5));}
     else                                                        {cMTask.Delay(taskRf,TASK_TOUT_MS(1));}
-    cMTask.Delay(taskSleep,TASK_TOUT_MS(100));
 }
