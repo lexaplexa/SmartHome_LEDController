@@ -2,7 +2,7 @@
  * conf_board.h
  *
  * Created: 11.2.2016 13:01:57
- * Revised: 24.6.2018
+ * Revised: 15.7.2018
  * Author: LeXa
  * BOARD: LED_LIGHT_E2
  *
@@ -88,7 +88,5 @@
     #define PWMCH1_PIN                  PIN0_bp
     #define PWMCH2_PIN                  PIN1_bp
     #define PWM_FRQ_HZ                  270
-    #define PWM_DELAY_INC_MS            10
-    #define PWM_DELAY_DEC_MS            10
 
 #endif /* CONF_BOARD_H_ */

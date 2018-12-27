@@ -2,7 +2,7 @@
  * task_rf.cpp
  *
  * Created: 15.2.2016 14:25:22
- * Revised: 25.06.2018
+ * Revised: 27.12.2018
  * Author: LeXa
  * BOARD:
  *
@@ -71,11 +71,12 @@ void taskRf()
             
             
         case RF_COMM_LED_SET_PWM:
-            if (RFData.Master.sSetPwm.unPwmChannel == 1)
+            if (cRf.m_sPayload.unCounter < 2) {RFData.eRfCommand = RF_COMM_ERROR; RFData.Slave.eError = ERROR_OUT_OF_RANGE;}
+            else if (RFData.Master.sSetPwm.unPwmChannel == 1)
             {
                 if (cRf.m_sPayload.unCounter == 3)  {SetCH1(RFData.Master.sSetPwm.unPercent,0);}
                 else if (nCH1SetPwmVal)             {SetCH1(0,0);}
-                else                                {SetCH1(100,0);}
+                else                                {SetCH1(DSLed.unPwmCH1MaxVal,0);}
                 
                 if (!nCH2SetPwmVal) {DSLed.bCh1First = true;}
                 else {DSLed.bCh1First = false;}
@@ -85,7 +86,7 @@ void taskRf()
             {
                 if (cRf.m_sPayload.unCounter == 3)  {SetCH2(RFData.Master.sSetPwm.unPercent,0);}
                 else if (nCH2SetPwmVal)             {SetCH2(0,0);}
-                else                                {SetCH2(100,0);}
+                else                                {SetCH2(DSLed.unPwmCH2MaxVal,0);}
                     
                 if (!nCH1SetPwmVal) {DSLed.bCh1First = false;}
                 else {DSLed.bCh1First = true;}
@@ -95,18 +96,20 @@ void taskRf()
             {
                 if (cRf.m_sPayload.unCounter == 3)          {SetCH1(RFData.Master.sSetPwm.unPercent,0); SetCH2(RFData.Master.sSetPwm.unPercent,0);}
                 else if (nCH2SetPwmVal || nCH1SetPwmVal)    {SetCH1(0,0); SetCH2(0,0);}
-                else                                        {SetCH1(100,0); SetCH2(100,0);}
+                else                                        {SetCH1(DSLed.unPwmCH1MaxVal,0); SetCH2(DSLed.unPwmCH2MaxVal,0);}
                 RFData.Slave.eError = ERROR_OK;
             }
             else {RFData.eRfCommand = RF_COMM_ERROR; RFData.Slave.eError = ERROR_OUT_OF_RANGE;}
             unRfMsgSize = 2;
             break;
             
+            
         case RF_COMM_LED_CLEAR_LIGHTON_COUNTER:
             unTimeLightsOn = 0;
             RFData.Slave.eError = ERROR_OK;
             unRfMsgSize = 2;
             break;
+        
         
         default:
             RFData.eRfCommand = RF_COMM_ERROR;
@@ -123,5 +126,4 @@ SIGNAL(RF_IRQ_vect)
     if (DSRf.unRFBaud == (RF_BAUD_enum)RF_BAUD_250kbps_gc)      {cMTask.Delay(taskRf,TASK_TOUT_MS(10));}
     else if (DSRf.unRFBaud == (RF_BAUD_enum)RF_BAUD_1Mbps_gc)   {cMTask.Delay(taskRf,TASK_TOUT_MS(5));}
     else                                                        {cMTask.Delay(taskRf,TASK_TOUT_MS(1));}
-    cMTask.Delay(taskSleep,TASK_TOUT_MS(100));
 }
