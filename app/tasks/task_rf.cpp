@@ -2,7 +2,7 @@
  * task_rf.cpp
  *
  * Created: 15.2.2016 14:25:22
- * Revised: 7.7.2018
+ * Revised: 27.12.2018
  * Author: LeXa
  * BOARD:
  *
@@ -71,7 +71,8 @@ void taskRf()
             
             
         case RF_COMM_LED_SET_PWM:
-            if (RFData.Master.sSetPwm.unPwmChannel == 1)
+            if (cRf.m_sPayload.unCounter < 2) {RFData.eRfCommand = RF_COMM_ERROR; RFData.Slave.eError = ERROR_OUT_OF_RANGE;}
+            else if (RFData.Master.sSetPwm.unPwmChannel == 1)
             {
                 if (cRf.m_sPayload.unCounter == 3)  {SetCH1(RFData.Master.sSetPwm.unPercent,0);}
                 else if (nCH1SetPwmVal)             {SetCH1(0,0);}
