@@ -2,7 +2,7 @@
  * conf_multitask.h
  *
  * Created: 4.1.2016 14:11:06
- * Revised: 24.6.2018
+ * Revised: 27.12.2018
  * Author: LeXa
  * BOARD:
  *
@@ -23,7 +23,6 @@
 #define MULTITASK_TIMER             TCC0
 #define TICKS_PER_SECOND            1000
 #define STARTUP_TIMEOUT             10
-#define DEEP_SLEEP                  true
 #define BOOT_LOADER                 false
 #define APP_BASE_ADDR               0x0000
 #define APP_RESET_VECTOR_ADDR       APP_BASE_ADDR       /* Only for compatibility with Atmel SAM uC */
